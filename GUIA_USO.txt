@@ -1,0 +1,148 @@
+GUIA DE UTILIZAÇÃO DO MINI-SITE APRESENTAÇÃO IDENTIDADE VISUAL
+
+============================================================
+1. ESTRUTURA DO PROJETO
+============================================================
+
+Pasta: C:\Users\Thiago Vega\Programas App\
+
+Arquivos gerados:
+- index.html       -> Página principal do mini-site
+- assets/          -> Pasta com imagens utilizadas no site
+  - avatar.png     -> Imagem do avatar (1:1)
+  - capafacebook.png -> Imagem da capa do Facebook (desktop e mobile)
+  - instagram.png  -> Imagem de template do Instagram
+  - website.png    -> Mockup do site profissional
+  - logo.png       -> Logo da empresa (40x40px)
+
+2. COMO RODAR LOCALMENTE
+============================================================
+
+Opção A - Duplo clique:
+1. Navegue até a pasta C:\Users\Thiago Vega\Programas App\
+2. Dê duplo clique em "index.html"
+3. O site abrirá no seu navegador padrão
+
+Opção B - Via linha de comando:
+1. Abra o PowerShell ou CMD
+2. Digite: cd "C:\Users\Thiago Vega\Programas App"
+3. Digite: start index.html
+   ou: python -m http.server 8000
+   Depois acesse: http://localhost:8000
+
+3. ALTERANDO AS IMAGENS
+============================================================
+
+Todas as imagens estão na pasta assets/ e podem ser substituídas facilmente:
+
+- Para trocar o avatar: substitua o arquivo assets/avatar.png por uma nova imagem
+- Para trocar a capa do Facebook: substitua assets/capafacebook.png
+  * A imagem deve conter ambos os layouts (desktop e mobile) ou será cortada proporcionalmente
+- Para trocar templates Instagram: substitua assets/instagram.png
+- Para trocar o mockup do website: substitua assets/website.png
+- Para trocar o logo: substitua assets/logo.png
+
+As imagens têm dimensões recomendadas:
+- avatar.png: 512x512px (quadrada)
+- capafacebook.png: 2250x630px (desktop) / 1080x1920px (mobile)
+- instagram.png: 1080x1080px (post) / 1080x1920px (story)
+- website.png: 1400x800px (aproximado)
+- logo.png: 40x40px (óptimo)
+
+4. COMO PUBLICAR NO NETLIFY (Para cliente visualizar online)
+============================================================
+
+Passo a passo para publicar este site e compartilhar o link:
+
+1. Crie uma conta em https://www.netlify.com (gratuita)
+2. No painel da Netlify, clique em "New site from Git"
+3. Escolha "Upload a build file"
+4. Faça upload da pasta inteira (ou zip) contendo:
+   - index.html
+   - pasta assets/
+5. Clique em "Deploy site"
+6. Após o processamento, a Netlify gerará um link do tipo:
+   https://seu-site-xxxxx.netlify.app
+
+5. COMPARTILHANDO COM O CLIENTE
+============================================================
+
+O link gerado pode ser compartilhado diretamente. O cliente poderá:
+- Visualizar o mini-site em qualquer dispositivo
+- Navegar entre as seções pelo menu fixo
+- Ver todas as seções da identidade visual desenvolvida
+- Ver o pacote completo de entrega
+
+6. ESTRUTURA DO MENU (Âncoras)
+============================================================
+
+O menu fixo no topo possui links que fazem âncora para:
+- #identidade  -> Seção Identidade Visual
+- #avatar      -> Seção Avatar Facebook & Instagram
+- #facebook    -> Seção Capa de Facebook Remodulada
+- #instagram   -> Seção Templates para Instagram
+- #website     -> Seção Website Profissional
+- #pacote      -> Seção Pacote Completo de Entrega
+
+7. CORES E TIPografia
+============================================================
+
+Paleta de cores utilizada:
+- Vermelho principal: #D22B2B
+- Vermelho secundário: #A81E1E  
+- Cinza escuro: #1A1A1A (fundo)
+- Cinza claro: #F5F5F5 (cards)
+- Amarelo: #F5C332 (accent)
+- Branco: #FFFFFF
+
+Tipografia: Inter Rounded (Google Fonts)
+- Pesos utilizados: 300 (Light), 400 (Regular), 500 (Medium), 600 (Semi-Bold), 700 (Bold)
+
+8. ANIMAÇÕES
+============================================================
+
+O site possui animações suaves:
+- Fade-in: elementos aparecem gradualmente
+- Slide-in: elementos deslizam de cima para baixo
+- Delay diferenciado por seção (0.1s a 0.5s)
+- Hover effects no header e botões
+
+9. PERSONALIZAÇÕES ADICIONAIS
+============================================================
+
+Para ajustes finos no CSS, edite o bloco <style> no index.html:
+
+- Alterar cores: modify as variáveis :root no topo
+- Alterar espaçamento: modify os valores de padding/margin
+- Alterar animações: modify as keyframes @keyframes
+- Alterar responsividade: modify as media queries (já incluídas implicitamente)
+
+============================================================
+DÚVIDAS COMUNS
+============================================================
+
+Q: O site não carrega as imagens?
+R: Verifique se os nomes dos arquivos na pasta assets/ correspondem
+  aos usados no HTML (src="assets/arquivo.png")
+
+Q: Quero mudar a paleta de cores?
+R: Edite as variáveis --vermelho-principal, --cinza-escuro, etc.
+  na seção :root do CSS
+
+Q: Como adicionar mais páginas?
+R: Este é um site de uma única página (single page). As âncoras
+  do menu já conectam todas as seções. Basta adicionar mais
+  <section> no corpo do HTML.
+
+============================================================
+LINK DO SITE FINAL (EXEMPLO):
+============================================================
+
+Após deployment no Netlify, o link terá o formato:
+https://fireprincat-identidadevisual.netlify.app
+
+Ou o link que você já possui:
+https://fireprincat.netlify.app
+
+Compartilhe este link com o cliente para que ele visualize
+todo o pacote visual desenvolvido profissionalmente.

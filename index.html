@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fire Prin Lisboa — Identidade Digital</title>
+  <meta name="description" content="Apresentação oficial da identidade digital Fire Prin Lisboa: logótipo, avatar, capa de Facebook, intro em vídeo e website final.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       VARIABLES & RESET
+       ============================================================ */
+    :root {
+      --vermelho: #E30613;
+      --vermelho-escuro: #7A0E0E;
+      --laranja: #FF6B35;
+      --dourado: #FFC72C;
+      --preto: #0D0D0D;
+      --tinta: #111111;
+      --cinza: #5C5C5C;
+      --cinza-suave: #9A9A9A;
+      --linha: #E6E6E6;
+      --fundo-card: #F7F7F7;
+      --fundo-escuro: #0A0A0A;
+      --branco: #FFFFFF;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--branco);
+      color: var(--tinta);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; height: auto; }
+
+    /* Image error fallback */
+    .card-media img[src]::after,
+    .media-padded img[src]::after {
+      content: "";
+      display: block;
+      position: absolute;
+      inset: 0;
+      background: var(--fundo-card);
+    }
+
+    /* ============================================================
+       PRELOADER
+       ============================================================ */
+    .preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--branco);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.6rem;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .preloader.escondido {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .preloader img {
+      width: 96px;
+      height: auto;
+      animation: preloaderPulse 1.2s ease-in-out infinite;
+    }
+
+    .preloader-bar {
+      width: 120px;
+      height: 3px;
+      background: var(--linha);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .preloader-bar::after {
+      content: "";
+      display: block;
+      width: 40%;
+      height: 100%;
+      background: var(--vermelho);
+      border-radius: 3px;
+      animation: preloaderSlide 1s ease-in-out infinite;
+    }
+
+    @keyframes preloaderPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.7; }
+    }
+
+    @keyframes preloaderSlide {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(350%); }
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.75rem clamp(1rem, 4vw, 3rem);
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+    }
+
+    header.dark-mode {
+      background: rgba(10, 10, 10, 0.92);
+      color: var(--branco);
+    }
+
+    header.rolou {
+      border-bottom-color: var(--linha);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    header.dark-mode.rolou {
+      border-bottom-color: rgba(255,255,255,0.08);
+    }
+
+    .marca {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--preto);
+      z-index: 101;
+    }
+
+    header.dark-mode .marca { color: var(--branco); }
+
+    .marca img { height: 60px; width: auto; }
+
+    .marca span {
+      font-weight: 800;
+      font-size: 0.92rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Desktop nav */
+    nav { display: flex; align-items: center; gap: clamp(0.8rem, 2vw, 1.6rem); }
+
+    nav a:not(.nav-btn) {
+      color: var(--cinza);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding-bottom: 2px;
+      border-bottom: 2px solid transparent;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    header.dark-mode nav a:not(.nav-btn) { color: var(--cinza-suave); }
+
+    nav a:not(.nav-btn):hover,
+    nav a.ativo { color: var(--preto); border-bottom-color: var(--vermelho); }
+
+    header.dark-mode nav a:not(.nav-btn):hover,
+    header.dark-mode nav a.ativo { color: var(--branco); }
+
+    .nav-btn {
+      background: var(--vermelho);
+      color: var(--branco);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .nav-btn:hover { background: var(--preto); transform: translateY(-1px); }
+
+    /* Hamburger */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 36px;
+      height: 36px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 101;
+      padding: 4px;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--preto);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    header.dark-mode .menu-toggle span { background: var(--branco); }
+
+    .menu-toggle.aberto span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .menu-toggle.aberto span:nth-child(2) { opacity: 0; }
+    .menu-toggle.aberto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu overlay */
+    .menu-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(20px);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .menu-mobile.aberto {
+      display: flex;
+      opacity: 1;
+    }
+
+    .menu-mobile a {
+      color: var(--preto);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.25s;
+    }
+
+    .menu-mobile a:hover { color: var(--vermelho); }
+
+    .menu-mobile .nav-btn-mobile {
+      margin-top: 1rem;
+      background: var(--vermelho);
+      color: var(--branco);
+      padding: 0.8rem 2.2rem;
+      border-radius: 999px;
+      font-size: 1rem;
+    }
+
+    .menu-mobile .nav-btn-mobile:hover { background: var(--preto); color: var(--branco); }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 1.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 0%, rgba(227, 6, 19, 0.09), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 20% 80%, rgba(255, 107, 53, 0.06), transparent 50%),
+        radial-gradient(ellipse 50% 35% at 80% 90%, rgba(255, 199, 44, 0.08), transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Subtle animated glow */
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(227, 6, 19, 0.04), transparent 70%);
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: heroGlow 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes heroGlow {
+      0% { transform: translateX(-50%) scale(1); opacity: 0.5; }
+      100% { transform: translateX(-50%) scale(1.3); opacity: 1; }
+    }
+
+    .hero > * { position: relative; }
+
+    .hero-kicker {
+      color: var(--vermelho);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 7.5vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.02;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      max-width: 18ch;
+      color: var(--preto);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--vermelho), var(--laranja));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      margin-top: 1.2rem;
+      color: var(--cinza);
+      font-size: clamp(1rem, 2vw, 1.15rem);
+      max-width: 50ch;
+      line-height: 1.65;
+    }
+
+    .hero-logo {
+      width: min(180px, 24vw);
+      height: auto;
+      margin-top: 2.4rem;
+      filter: drop-shadow(0 12px 28px rgba(13, 13, 13, 0.15));
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2.4rem;
+      background: var(--vermelho);
+      color: var(--branco);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.4rem;
+      border-radius: 999px;
+      box-shadow: 0 12px 30px rgba(227, 6, 19, 0.25);
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+    }
+
+    .hero-cta:hover {
+      background: var(--preto);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+    }
+
+    .hero-cta svg { width: 16px; height: 16px; fill: currentColor; transition: transform 0.25s; }
+    .hero-cta:hover svg { transform: translateY(2px); }
+
+    /* ============================================================
+       TABS DE FILTRO
+       ============================================================ */
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2.4rem;
+    }
+
+    .tabs a {
+      display: inline-block;
+      padding: 0.55rem 1.3rem;
+      border: 1.5px solid var(--linha);
+      border-radius: 999px;
+      color: var(--tinta);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      background: var(--branco);
+      transition: all 0.25s ease;
+    }
+
+    .tabs a:hover {
+      background: var(--preto);
+      border-color: var(--preto);
+      color: var(--branco);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================================
+       GALERIA
+       ============================================================ */
+    .galeria-zona {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3rem) clamp(4rem, 8vw, 5.5rem);
+    }
+
+    .galeria-topo {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      border-bottom: 1px solid var(--linha);
+      padding-bottom: 1rem;
+      margin-bottom: 2.4rem;
+    }
+
+    .galeria-topo h2 {
+      font-size: clamp(1.1rem, 2.4vw, 1.4rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+    }
+
+    .galeria-topo span {
+      color: var(--cinza-suave);
+      font-size: 0.82rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: clamp(1.4rem, 3.5vw, 2.8rem) clamp(1.2rem, 3vw, 2.4rem);
+    }
+
+    @media (min-width: 760px) {
+      .galeria .card:nth-child(even) { margin-top: 56px; }
+    }
+
+    .card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      scroll-margin-top: 90px;
+    }
+
+    .card-media {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      background: var(--fundo-card);
+      aspect-ratio: 464 / 340;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      transition: box-shadow 0.3s;
+    }
+
+    .card:hover .card-media {
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-media img,
+    .card-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .card-media .media-padded {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: linear-gradient(135deg, #f8f8f8, #efefef);
+    }
+
+    .card-media .media-padded img {
+      width: auto;
+      max-width: 68%;
+      max-height: 80%;
+      object-fit: contain;
+    }
+
+    .card:hover .card-media img,
+    .card:hover .card-media video { transform: scale(1.05); }
+
+    /* Image error fallback */
+    .card-media img.img-erro {
+      object-fit: contain;
+      width: 48%;
+      height: auto;
+      opacity: 0.25;
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      background: rgba(13, 13, 13, 0.5);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .card-overlay b {
+      color: var(--branco);
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      transform: translateY(8px);
+      transition: transform 0.35s ease;
+    }
+
+    .card-overlay i {
+      width: 30px;
+      height: 2px;
+      background: var(--dourado);
+      transform: translateY(8px);
+      transition: transform 0.35s ease 0.05s;
+    }
+
+    .card:hover .card-overlay,
+    .card:focus-visible .card-overlay { opacity: 1; }
+
+    .card:hover .card-overlay b,
+    .card:hover .card-overlay i { transform: translateY(0); }
+
+    .card-legenda {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 0.6rem;
+      padding-top: 0.75rem;
+    }
+
+    .card-legenda h3 { font-size: 0.98rem; font-weight: 700; }
+
+    .card-legenda small {
+      color: var(--cinza-suave);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ============================================================
+       DETAIL SECTIONS — SHARED
+       ============================================================ */
+    section.detalhe {
+      padding: clamp(3.5rem, 7vw, 5.5rem) clamp(1.25rem, 5vw, 3rem);
+      scroll-margin-top: 80px;
+    }
+
+    section.detalhe .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .kicker {
+      color: var(--vermelho);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .titulo {
+      text-align: center;
+      font-size: clamp(1.5rem, 3.5vw, 2.3rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      color: var(--preto);
+      margin: 0.4rem 0 0.7rem;
+    }
+
+    .descricao {
+      text-align: center;
+      color: var(--cinza);
+      max-width: 540px;
+      margin: 0 auto 2.6rem;
+      font-size: 0.95rem;
+    }
+
+    /* Dark section overrides */
+    section.dark {
+      background: var(--fundo-escuro);
+      color: var(--branco);
+    }
+
+    section.dark .titulo { color: var(--branco); }
+    section.dark .descricao { color: rgba(255,255,255,0.6); }
+
+
+    /* Light gray section */
+    section.bg-claro {
+      background: var(--fundo-card);
+    }
+
+    /* Split layout */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+
+    .split-text h3 {
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .split-text p {
+      color: var(--cinza);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .split-text .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .split-text .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--tinta);
+    }
+
+    .split-text .feature-list li svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      fill: var(--vermelho);
+    }
+
+    section.dark .split-text p { color: rgba(255,255,255,0.6); }
+    section.dark .split-text h3 { color: var(--branco); }
+    section.dark .split-text .feature-list li { color: rgba(255,255,255,0.85); }
+
+    /* ============================================================
+       LOGO SECTION
+       ============================================================ */
+    .logo-display {
+      background: var(--fundo-card);
+      border-radius: 12px;
+      padding: clamp(2.5rem, 6vw, 4.5rem);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+    }
+
+    .logo-display img {
+      width: min(400px, 80%);
+      height: auto;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3));
+    }
+
+    .logo-display img.img-erro {
+      filter: none;
+      opacity: 0.3;
+      width: 120px;
+    }
+
+    /* Palette expanded */
+    .paleta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .cor-card {
+      background: var(--branco);
+      border: 1px solid var(--linha);
+      border-radius: 10px;
+      padding: 1.2rem;
+      text-align: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .cor-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .swatch {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      margin: 0 auto 0.8rem;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.08);
+    }
+
+    .cor-card .cor-nome {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--tinta);
+      margin-bottom: 0.15rem;
+    }
+
+    .cor-card .cor-hex {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--cinza-suave);
+      letter-spacing: 0.04em;
+      font-family: "SF Mono", "Fira Code", monospace;
+    }
+
+    /* ============================================================
+       AVATAR SECTION
+       ============================================================ */
+    .avatar-mockups {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+
+    .avatar-mockup {
+      text-align: center;
+    }
+
+    .avatar-frame {
+      position: relative;
+      width: clamp(160px, 30vw, 200px);
+      height: clamp(160px, 30vw, 200px);
+      margin: 0 auto;
+      transition: transform 0.35s ease;
+    }
+
+    .avatar-mockup:hover .avatar-frame { transform: scale(1.04); }
+
+    .avatar-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .avatar-frame img.img-erro {
+      object-fit: contain;
+      width: 50%;
+      height: auto;
+      opacity: 0.2;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .frame-circle {
+      border-radius: 50%;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14), 0 0 0 3px var(--dourado);
+    }
+
+    .frame-square {
+      border-radius: 24%;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
+    }
+
+    .frame-social {
+      border-radius: 12px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
+      border: 2px solid var(--linha);
+    }
+
+    .avatar-mockup .label {
+      display: block;
+      margin-top: 0.9rem;
+      color: var(--cinza);
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    /* ============================================================
+       BROWSER MOCKUP
+       ============================================================ */
+    .browser {
+      background: var(--branco);
+      border: 1px solid var(--linha);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.10);
+    }
+
+    section.dark .browser {
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: 0 24px 56px rgba(0, 0, 0, 0.4);
+    }
+
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.65rem 1rem;
+      background: #F1F1F1;
+      border-bottom: 1px solid var(--linha);
+    }
+
+    section.dark .browser-bar { background: #1a1a1a; border-color: rgba(255,255,255,0.08); }
+
+    .pontos { display: flex; gap: 0.4rem; }
+    .pontos i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+    .pontos i:nth-child(1) { background: #FF5F57; }
+    .pontos i:nth-child(2) { background: #FEBC2E; }
+    .pontos i:nth-child(3) { background: #28C840; }
+
+    .url {
+      flex: 1;
+      background: var(--branco);
+      border: 1px solid var(--linha);
+      border-radius: 99px;
+      padding: 0.25rem 1rem;
+      font-size: 0.75rem;
+      color: var(--cinza);
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    section.dark .url { background: #111; border-color: rgba(255,255,255,0.08); color: var(--cinza-suave); }
+
+    .browser-body {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .browser img { width: 100%; height: auto; display: block; }
+    .browser img.img-erro { opacity: 0.15; padding: 3rem; object-fit: contain; height: 200px; }
+
+    /* ============================================================
+       PHONE MOCKUP
+       ============================================================ */
+    .telemovel {
+      width: min(280px, 75vw);
+      margin: 0 auto;
+      padding: 10px;
+      background: var(--preto);
+      border-radius: 36px;
+      box-shadow: 0 28px 56px rgba(0, 0, 0, 0.25), 0 0 0 4px rgba(227, 6, 19, 0.08);
+    }
+
+    .telemovel video,
+    .telemovel .phone-screen {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+      display: block;
+      border-radius: 27px;
+      background: #000;
+    }
+
+    .phone-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .phone-screen img {
+      width: 60%;
+      height: auto;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3));
+    }
+
+    .phone-screen img.img-erro { opacity: 0.2; width: 40%; filter: none; }
+
+    .phone-screen span {
+      color: var(--branco);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .nota {
+      text-align: center;
+      color: var(--cinza);
+      font-size: 0.88rem;
+      margin-top: 2rem;
+    }
+
+    .nota b { color: var(--vermelho); font-weight: 700; }
+
+    section.dark .nota { color: rgba(255,255,255,0.5); }
+    section.dark .nota b { color: var(--dourado); }
+
+    /* ============================================================
+       WEBSITE MULTI-DEVICE MOCKUP
+       ============================================================ */
+    .multi-device {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: clamp(1rem, 3vw, 2rem);
+      padding: 2rem 0;
+    }
+
+    .device-desktop {
+      width: min(520px, 70%);
+      flex-shrink: 0;
+    }
+
+    .device-phone {
+      width: min(140px, 22%);
+      flex-shrink: 0;
+      margin-bottom: 0;
+    }
+
+    .device-phone .telemovel {
+      width: 100%;
+      padding: 5px;
+      border-radius: 20px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+    }
+
+    .device-phone .phone-screen {
+      border-radius: 15px;
+      aspect-ratio: 9/16;
+    }
+
+    /* CSS Website Mockup (fallback for broken website.png) */
+    .website-mockup {
+      background: linear-gradient(180deg, #1a1a1a 0%, #111 100%);
+      border-radius: 0 0 8px 8px;
+      padding: 2rem;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .website-mockup .mock-logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--vermelho), var(--laranja));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .website-mockup .mock-logo span {
+      color: var(--branco);
+      font-weight: 900;
+      font-size: 1.1rem;
+    }
+
+    .website-mockup h4 {
+      color: var(--branco);
+      font-size: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .website-mockup .mock-line {
+      width: 60%;
+      height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 3px;
+    }
+
+    .website-mockup .mock-line.short { width: 40%; }
+
+    .website-mockup .mock-btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      background: var(--vermelho);
+      color: var(--branco);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.4rem 1.2rem;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .cta-zona { text-align: center; }
+
+    /* ============================================================
+       CTA BAND
+       ============================================================ */
+    .faixa {
+      background:
+        radial-gradient(ellipse 60% 80% at 15% 20%, rgba(255, 199, 44, 0.14), transparent 50%),
+        radial-gradient(ellipse 50% 60% at 85% 80%, rgba(255, 107, 53, 0.12), transparent 50%),
+        linear-gradient(135deg, var(--vermelho), var(--vermelho-escuro));
+      color: var(--branco);
+      text-align: center;
+      padding: clamp(3.5rem, 8vw, 5.5rem) 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .faixa::before {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.03);
+      top: -100px;
+      right: -50px;
+      pointer-events: none;
+    }
+
+    .faixa h2 {
+      font-size: clamp(1.6rem, 4.2vw, 2.6rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      max-width: 24ch;
+      margin: 0 auto;
+      line-height: 1.1;
+      position: relative;
+    }
+
+    .faixa p {
+      margin-top: 0.9rem;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: clamp(0.92rem, 1.8vw, 1.05rem);
+      max-width: 46ch;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+
+    .faixa a {
+      display: inline-block;
+      margin-top: 2rem;
+      background: var(--branco);
+      color: var(--vermelho);
+      font-weight: 800;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.4rem;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: transform 0.25s, box-shadow 0.25s, color 0.25s;
+      position: relative;
+    }
+
+    .faixa a:hover {
+      color: var(--preto);
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+    }
+
+    /* ============================================================
+       SCROLL TO TOP
+       ============================================================ */
+    .scroll-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 44px;
+      height: 44px;
+      background: var(--preto);
+      color: var(--branco);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.25s;
+      z-index: 90;
+    }
+
+    .scroll-top.visivel {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .scroll-top:hover { background: var(--vermelho); }
+    .scroll-top svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer {
+      background: var(--fundo-card);
+      border-top: 1px solid var(--linha);
+      padding: clamp(2.4rem, 5vw, 3.5rem) clamp(1.25rem, 5vw, 3rem) 1.5rem;
+    }
+
+    .footer-grid {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 2.2rem;
+    }
+
+    .footer-marca {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-marca img { height: 48px; width: auto; }
+    .footer-marca img.img-erro { width: 24px; height: 24px; opacity: 0.2; }
+
+    .footer-marca strong {
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .footer-grid p {
+      color: var(--cinza);
+      font-size: 0.85rem;
+      max-width: 38ch;
+      line-height: 1.6;
+    }
+
+    .footer-grid h4 {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.9rem;
+      color: var(--preto);
+    }
+
+    .footer-grid ul { list-style: none; }
+
+    .footer-grid li { margin-bottom: 0.5rem; }
+
+    .footer-grid a {
+      color: var(--cinza);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.25s;
+    }
+
+    .footer-grid a:hover { color: var(--vermelho); }
+
+    /* Social icons in footer */
+    .social-icons {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 1rem;
+    }
+
+    .social-icons a {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--linha);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.25s, transform 0.25s;
+    }
+
+    .social-icons a:hover {
+      background: var(--vermelho);
+      transform: translateY(-2px);
+    }
+
+    .social-icons a svg {
+      width: 16px;
+      height: 16px;
+      fill: var(--cinza);
+      transition: fill 0.25s;
+    }
+
+    .social-icons a:hover svg { fill: var(--branco); }
+
+    .footer-base {
+      max-width: 1180px;
+      margin: 2rem auto 0;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--linha);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+      color: var(--cinza-suave);
+      font-size: 0.78rem;
+    }
+
+    .footer-base strong { color: var(--preto); font-weight: 700; }
+
+    /* ============================================================
+       ANIMATIONS
+       ============================================================ */
+    .js .revelar {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .js .revelar.visivel { opacity: 1; transform: none; }
+
+    .js .revelar.atrasar-1 { transition-delay: 0.1s; }
+    .js .revelar.atrasar-2 { transition-delay: 0.2s; }
+    .js .revelar.atrasar-3 { transition-delay: 0.3s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .js .revelar { opacity: 1; transform: none; transition: none; }
+      .card-media img, .card-media video { transition: none; }
+      .hero::after { animation: none; }
+      .preloader img { animation: none; }
+      .preloader-bar::after { animation: none; }
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width: 759px) {
+      .galeria { grid-template-columns: 1fr; }
+      .galeria-topo { flex-direction: column; gap: 0.3rem; }
+      .split { grid-template-columns: 1fr; gap: 2rem; }
+      .multi-device { flex-direction: column; align-items: center; }
+      .device-desktop { width: 90%; }
+      .device-phone { width: 40%; margin-top: -1rem; }
+      .paleta { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 720px) {
+      .menu-toggle { display: flex; }
+      nav { display: none; }
+
+      header {
+        padding: 0.65rem 1rem;
+      }
+
+      section.detalhe { scroll-margin-top: 60px; }
+
+      .hero { min-height: auto; padding: 6rem 1.2rem 3rem; }
+      .footer-grid { grid-template-columns: 1fr; gap: 1.6rem; }
+      .footer-base { flex-direction: column; gap: 0.4rem; }
+    }
+
+    @media (min-width: 721px) {
+      .menu-mobile { display: none !important; }
+    }
+    /* ============================================================
+       OVERRIDE: GALLERY — No Crop, Aligned Grid
+       ============================================================ */
+    .galeria .card:nth-child(even) { margin-top: 0 !important; }
+
+    .galeria .card-media {
+      aspect-ratio: auto;
+      height: 300px;
+      background: var(--fundo-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      padding: 1.5rem;
+    }
+
+    .galeria .card-media img,
+    .galeria .card-media video {
+      object-fit: contain;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .galeria .card-media video {
+      aspect-ratio: 9 / 16;
+      height: 100%;
+    }
+
+    .galeria .card-media .media-padded {
+      padding: 0;
+    }
+
+    .galeria .card-media .media-padded img {
+      max-width: 70%;
+      max-height: 90%;
+    }
+
+    @media (min-width: 760px) {
+      .galeria {
+        grid-template-columns: repeat(3, 1fr);
+        align-items: start;
+      }
+      .galeria .card:nth-child(4) {
+        grid-column: 1 / 2;
+        justify-self: center;
+        width: 85%;
+      }
+      .galeria .card:nth-child(5) {
+        grid-column: 2 / 3;
+        justify-self: center;
+        width: 85%;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .galeria {
+        grid-template-columns: repeat(3, 1fr);
+        gap: clamp(1.6rem, 3vw, 2.4rem);
+      }
+    }
+
+    /* ============================================================
+       OVERRIDE: HERO — Fundo Vermelho, Texto Preto/Dourado
+       ============================================================ */
+    .hero {
+      background: linear-gradient(145deg, #E30613 0%, #C00510 45%, #8B0A0A 100%);
+      min-height: 100vh;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 25% 25%, rgba(255, 199, 44, 0.12), transparent 55%),
+        radial-gradient(ellipse 50% 40% at 80% 75%, rgba(0, 0, 0, 0.12), transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 199, 44, 0.06), transparent 65%);
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: heroGlow 8s ease-in-out infinite alternate;
+      pointer-events: none;
+    }
+
+    .hero-kicker {
+      color: rgba(255, 255, 255, 0.65);
+      letter-spacing: 0.35em;
+    }
+
+    .hero h1 {
+      color: var(--preto);
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .hero h1 em {
+      color: var(--dourado);
+      -webkit-text-fill-color: var(--dourado);
+      background: none;
+      text-shadow: 0 2px 16px rgba(255, 199, 44, 0.3);
+    }
+
+    .hero p {
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .hero .tabs a {
+      border-color: rgba(255, 255, 255, 0.25);
+      color: rgba(255, 255, 255, 0.85);
+      background: transparent;
+    }
+
+    .hero .tabs a:hover {
+      background: var(--preto);
+      border-color: var(--preto);
+      color: var(--branco);
+    }
+
+    .hero-cta {
+      background: var(--dourado);
+      color: var(--preto);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .hero-cta:hover {
+      background: var(--branco);
+      color: var(--vermelho);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-logo {
+      filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
+    }
+
+    /* ============================================================
+       OVERRIDE: HEADER — Transparente sobre Hero
+       ============================================================ */
+    header {
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom-color: transparent;
+    }
+
+    header .marca span,
+    header .marca { color: var(--branco); }
+
+    header nav a:not(.nav-btn) { color: rgba(255, 255, 255, 0.75); }
+    header nav a:not(.nav-btn):hover,
+    header nav a.ativo { color: var(--branco); border-bottom-color: var(--dourado); }
+
+    header .menu-toggle span { background: var(--branco); }
+
+    header.rolou {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom-color: var(--linha);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    header.rolou .marca span,
+    header.rolou .marca { color: var(--preto); }
+    header.rolou nav a:not(.nav-btn) { color: var(--cinza); }
+    header.rolou nav a:not(.nav-btn):hover,
+    header.rolou nav a.ativo { color: var(--preto); border-bottom-color: var(--vermelho); }
+    header.rolou .menu-toggle span { background: var(--preto); }
+
+    /* ============================================================
+       OVERRIDE: RESPONSIVE GALLERY
+       ============================================================ */
+    @media (max-width: 759px) {
+      .galeria {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .galeria .card:nth-child(4),
+      .galeria .card:nth-child(5) {
+        grid-column: auto;
+        justify-self: auto;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 1023px) and (min-width: 760px) {
+      .galeria {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .galeria .card:nth-child(4),
+      .galeria .card:nth-child(5) {
+        grid-column: auto;
+        justify-self: auto;
+        width: 100%;
+      }
+    }
+  
+    @media (max-width: 600px) {
+      #website .inner > div[style*="display:flex"] {
+        flex-direction: column;
+        align-items: center;
+      }
+      #website .inner > div[style*="display:flex"] > div:last-child {
+        width: min(120px, 30vw) !important;
+        margin-top: -1rem;
+      }
+    }
+  
+    /* ============================================================
+       OVERRIDE: ALL BACKGROUNDS FULL-WIDTH — NO WHITE BORDERS
+       ============================================================ */
+    section.detalhe,
+    .faixa,
+    footer {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    section.detalhe .inner,
+    .faixa h2, .faixa p, .faixa a,
+    footer .footer-grid,
+    footer .footer-base {
+      padding-left: clamp(1.25rem, 5vw, 3rem);
+      padding-right: clamp(1.25rem, 5vw, 3rem);
+    }
+    footer .footer-container {
+      padding-left: clamp(1.25rem, 5vw, 3rem);
+      padding-right: clamp(1.25rem, 5vw, 3rem);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader">
+    <img src="assets/logo.png" alt="" width="60" onerror="this.style.opacity='0.2'">
+    <div class="preloader-bar"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header id="topo">
+    <a class="marca" href="#topo">
+      <img src="assets/logo.png" alt="Fire Prin Lisboa" onerror="this.classList.add('img-erro')">
+      <span>Fire Prin Lisboa</span>
+    </a>
+
+    <nav>
+      <a href="#logotipo">Logótipo</a>
+      <a href="#avatar">Avatar</a>
+      <a href="#capa">Capa</a>
+      <a href="#wallpaper">Wallpaper</a>
+      <a href="#intro">Intro</a>
+      <a href="#website">Website</a>
+      <a class="nav-btn" href="https://fireprincat.netlify.app" target="_blank" rel="noopener">Ver o Meu Site</a>
+    </nav>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="menu-mobile" id="menuMobile">
+    <a href="#logotipo">Logótipo</a>
+    <a href="#avatar">Avatar</a>
+    <a href="#capa">Capa de Facebook</a>
+    <a href="#wallpaper">Wallpaper</a>
+    <a href="#intro">Intro em Vídeo</a>
+    <a href="#website">Website</a>
+    <a class="nav-btn-mobile" href="https://fireprincat.netlify.app" target="_blank" rel="noopener">Ver o Meu Site</a>
+  </div>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <div class="hero">
+    <p class="hero-kicker">Portfólio de Identidade Digital</p>
+    <h1>Fire Prin <em>Lisboa</em></h1>
+    <p>Tudo o que precisa para lançar a sua marca — logótipo, presença digital e website profissional, pronto a usar.</p>
+    <a href="#trabalhos" class="hero-cta">
+      Ver os Trabalhos
+      <svg viewBox="0 0 16 16"><path d="M8 12L2 6h12z"/></svg>
+    </a>
+    <div class="tabs">
+      <a href="#logotipo">Logótipo</a>
+      <a href="#avatar">Avatar</a>
+      <a href="#capa">Redes Sociais</a>
+      <a href="#intro">Vídeo</a>
+      <a href="#website">Website</a>
+    </div>
+    <img class="hero-logo" src="assets/logo.png" alt="Logótipo Fire Prin Lisboa" onerror="this.style.display='none'">
+  </div>
+
+  <!-- ============================================================
+       GALERIA
+       ============================================================ -->
+  <div class="galeria-zona" id="trabalhos">
+    <div class="galeria-topo revelar">
+      <h2>Trabalhos Entregues</h2>
+      <span>5 itens · Pacote completo</span>
+    </div>
+    <div class="galeria">
+
+      <a class="card revelar" href="#logotipo">
+        <div class="card-media">
+          <div class="media-padded"><img src="assets/logo.png" alt="O Logótipo Fire Prin Lisboa" loading="lazy" onerror="this.classList.add('img-erro')"></div>
+          <div class="card-overlay"><b>Explorar</b><i></i></div>
+        </div>
+        <div class="card-legenda">
+          <h3>O Logótipo</h3>
+          <small>Identidade Visual</small>
+        </div>
+      </a>
+
+      <a class="card revelar" href="#avatar">
+        <div class="card-media">
+          <img src="assets/avatar.png" alt="Avatar Universal — formato quadrado" loading="lazy" onerror="this.classList.add('img-erro')" style="width:auto; height:auto; max-width:44%; max-height:100%; object-fit:contain; padding:0;">
+          <img src="assets/avatar-redondo.png" alt="Avatar Universal — formato redondo" loading="lazy" onerror="this.classList.add('img-erro')" style="width:auto; height:auto; max-width:44%; max-height:100%; object-fit:contain; padding:0;">
+          <div class="card-overlay"><b>Explorar</b><i></i></div>
+        </div>
+        <div class="card-legenda">
+          <h3>Avatar Universal</h3>
+          <small>Foto de Perfil · Quadrado e Redondo</small>
+        </div>
+      </a>
+
+      <a class="card revelar" href="#capa">
+        <div class="card-media">
+          <img src="assets/capafacebook.png" alt="Capa de Facebook Fire Prin Lisboa" loading="lazy" onerror="this.classList.add('img-erro')">
+          <div class="card-overlay"><b>Explorar</b><i></i></div>
+        </div>
+        <div class="card-legenda">
+          <h3>Capa de Facebook</h3>
+          <small>Redes Sociais</small>
+        </div>
+      </a>
+
+      <a class="card revelar" href="#wallpaper">
+        <div class="card-media">
+          <img src="assets/wallpaper.jpg" alt="Wallpaper Fire Prin Lisboa" loading="lazy" onerror="this.classList.add('img-erro')">
+          <div class="card-overlay"><b>Explorar</b><i></i></div>
+        </div>
+        <div class="card-legenda">
+          <h3>Wallpaper</h3>
+          <small>Papel de Fundo</small>
+        </div>
+      </a>
+
+      <a class="card revelar" href="#intro">
+        <div class="card-media">
+          <video muted playsinline preload="metadata" src="assets/intro%20logo%20telemovel.mp4"></video>
+          <div class="card-overlay"><b>Explorar</b><i></i></div>
+        </div>
+        <div class="card-legenda">
+          <h3>Intro em Vídeo</h3>
+          <small>Animação de Marca</small>
+        </div>
+      </a>
+
+      <a class="card revelar" href="#website">
+        <div class="card-media">
+          <img src="assets/screenshot-website.png" alt="Website Fire Prin Lisboa" loading="lazy" onerror="this.classList.add('img-erro')">
+          <div class="card-overlay"><b>Explorar</b><i></i></div>
+        </div>
+        <div class="card-legenda">
+          <h3>O Seu Website</h3>
+          <small>Produto Final</small>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECÇÃO: LOGÓTIPO (Light gray bg)
+       ============================================================ -->
+  <section id="logotipo" class="detalhe bg-claro revelar">
+    <div class="inner">
+      <p class="kicker">Identidade Visual</p>
+      <h2 class="titulo">O Logótipo</h2>
+      <p class="descricao">Uma marca registada, pronta para brilhar em qualquer suporte — do cartão de visita ao website.</p>
+
+      <div class="split">
+        <div class="logo-display">
+          <img src="assets/logo.png" alt="Logótipo Fire Prin Lisboa" loading="lazy" onerror="this.classList.add('img-erro')">
+        </div>
+        <div class="split-text">
+          <h3>Paleta de Cores</h3>
+          <p>As cores oficiais da marca, definidas para garantir consistência visual em todas as aplicações — digital e impressa.</p>
+          <div class="paleta">
+            <div class="cor-card">
+              <div class="swatch" style="background:#E30613"></div>
+              <div class="cor-nome">Vermelho</div>
+              <div class="cor-hex">#E30613</div>
+            </div>
+            <div class="cor-card">
+              <div class="swatch" style="background:#FFC72C"></div>
+              <div class="cor-nome">Dourado</div>
+              <div class="cor-hex">#FFC72C</div>
+            </div>
+            <div class="cor-card">
+              <div class="swatch" style="background:#FF6B35"></div>
+              <div class="cor-nome">Laranja</div>
+              <div class="cor-hex">#FF6B35</div>
+            </div>
+            <div class="cor-card">
+              <div class="swatch" style="background:#0D0D0D"></div>
+              <div class="cor-nome">Preto</div>
+              <div class="cor-hex">#0D0D0D</div>
+            </div>
+            <div class="cor-card">
+              <div class="swatch" style="background:#FFFFFF; box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12)"></div>
+              <div class="cor-nome">Branco</div>
+              <div class="cor-hex">#FFFFFF</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECÇÃO: AVATAR (White bg)
+       ============================================================ -->
+  <section id="avatar" class="detalhe revelar" style="padding-bottom:clamp(5rem,10vw,8rem);">
+    <div class="inner">
+      <p class="kicker">Foto de Perfil</p>
+      <h2 class="titulo">Avatar Universal</h2>
+      <p class="descricao">O seu rosto digital — em duas versões, quadrada e redonda, prontas a usar como foto de perfil em qualquer plataforma.</p>
+
+            <div class="split" style="align-items:center; max-width:900px; margin:0 auto;">
+        <div style="text-align:center;">
+          <div class="avatar-mockups">
+            <div class="avatar-mockup">
+              <div class="avatar-frame" style="width:clamp(150px,23vw,200px); height:clamp(150px,23vw,200px); border-radius:22px;">
+                <img src="assets/avatar.png" alt="Avatar Universal — formato quadrado" loading="lazy" onerror="this.classList.add('img-erro')" style="filter:drop-shadow(0 12px 24px rgba(0,0,0,0.18));">
+              </div>
+              <span class="label">Formato Quadrado</span>
+            </div>
+            <div class="avatar-mockup">
+              <div class="avatar-frame" style="width:clamp(150px,23vw,200px); height:clamp(150px,23vw,200px); border-radius:50%; box-shadow:0 0 0 4px var(--dourado);">
+                <img src="assets/avatar-redondo.png" alt="Avatar Universal — formato redondo" loading="lazy" onerror="this.classList.add('img-erro')" style="filter:drop-shadow(0 12px 24px rgba(0,0,0,0.18));">
+              </div>
+              <span class="label">Formato Redondo</span>
+            </div>
+          </div>
+        </div>
+        <div class="split-text">
+          <div style="display:flex; align-items:center; gap:1rem; margin-bottom:1rem;">
+            <img src="assets/logo.png" alt="Logo" style="height:60px; width:auto;">
+            <h3 style="margin:0;">Avatar Universal</h3>
+          </div>
+          <p>O avatar é a cara da marca nas redes sociais e plataformas digitais. Este design foi criado para funcionar como foto de perfil em qualquer contexto — Facebook, Instagram, LinkedIn, Google Maps e muito mais.</p>
+          <ul class="feature-list">
+            <li>
+              <svg viewBox="0 0 16 16"><path d="M6.5 12.5l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg>
+              Formato quadrado e redondo — escolha o que preferir
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16"><path d="M6.5 12.5l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg>
+              Cores consistentes com a identidade visual
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16"><path d="M6.5 12.5l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg>
+              Pronto a usar em Facebook, Instagram, LinkedIn e mais
+            </li>
+          </ul>
+        </div>
+      </div>
+  </section>
+
+  <!-- ============================================================
+       SECÇÃO: CAPA FACEBOOK (Dark bg)
+       ============================================================ -->
+  <section id="capa" class="detalhe dark revelar">
+    <div class="inner">
+      <p class="kicker">Redes Sociais</p>
+      <h2 class="titulo">Capa de Facebook</h2>
+      <p class="descricao">A primeira impressão no Facebook — serviços, contactos e identidade visual, tudo num só olhar.</p>
+
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="pontos"><i></i><i></i><i></i></div>
+          <div class="url">facebook.com/fireprinlisboa</div>
+        </div>
+        <div class="browser-body">
+          <img src="assets/capafacebook.png" alt="Capa de Facebook Fire Prin Lisboa" loading="lazy" onerror="this.classList.add('img-erro')">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECÇÃO: WALLPAPER (Dark bg — browser mockup)
+       ============================================================ -->
+  <section id="wallpaper" class="detalhe dark revelar">
+    <div class="inner">
+      <p class="kicker">Branding Digital</p>
+      <h2 class="titulo">Wallpaper</h2>
+      <p class="descricao">O papel de fundo oficial da marca — pronto para desktop, mobile e apresentações.</p>
+
+      <div class="browser">
+        <div class="browser-bar">
+          <div class="pontos"><i></i><i></i><i></i></div>
+          <div class="url">fireprinlisboa.com/wallpaper</div>
+        </div>
+        <div class="browser-body">
+          <img src="assets/wallpaper.jpg" alt="Wallpaper Fire Prin Lisboa" loading="lazy" onerror="this.classList.add('img-erro')">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECÇÃO: INTRO VÍDEO (White bg — split layout)
+       ============================================================ -->
+  <section id="intro" class="detalhe revelar">
+    <div class="inner">
+      <p class="kicker">Animação de Marca</p>
+      <h2 class="titulo">Intro em Vídeo</h2>
+      <p class="descricao">Uma animação dinâmica do logótipo, preparada para Reels, Stories e qualquer plataforma social.</p>
+
+      <div class="split">
+        <div class="telemovel">
+          <video controls playsinline preload="metadata" src="assets/intro%20logo%20telemovel.mp4"></video>
+        </div>
+        <div class="split-text">
+          <h3>Animação Profissional</h3>
+          <p>O logótipo ganha vida num vídeo curto e impactante, ideal para usar como introdução em qualquer conteúdo digital.</p>
+          <ul class="feature-list">
+            <li>
+              <svg viewBox="0 0 16 16"><path d="M6.5 12.5l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg>
+              Formato vertical (9:16) para Stories e Reels
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16"><path d="M6.5 12.5l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg>
+              Pronta a publicar — basta transferir
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16"><path d="M6.5 12.5l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg>
+              Compatível com todas as plataformas
+            </li>
+            <li>
+              <svg viewBox="0 0 16 16"><path d="M6.5 12.5l-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg>
+              Qualidade profissional em alta definição
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="nota">Pronta a usar em <b>qualquer plataforma</b> — basta publicar.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SECÇÃO: WEBSITE (Dark bg — multi-device)
+       ============================================================ -->
+  <section id="website" class="detalhe revelar">
+    <div class="inner">
+      <p class="kicker">Produto Final</p>
+      <h2 class="titulo">O Seu Website</h2>
+      <p class="descricao">O site profissional já está online — design moderno, responsivo e pronto para receber clientes.</p>
+
+            <div style="display:flex; align-items:flex-start; justify-content:center; gap:clamp(1rem,3vw,2rem); max-width:1000px; margin:0 auto;">
+        <div class="browser" style="flex:1; min-width:0; border-radius:12px; overflow:hidden; box-shadow:0 24px 60px rgba(0,0,0,0.35);">
+          <div class="browser-bar">
+            <div class="pontos"><i></i><i></i><i></i></div>
+            <div class="url">fireprincat.netlify.app</div>
+          </div>
+          <div class="browser-body" style="aspect-ratio:16/9; overflow:hidden; background:#111;">
+            <img src="assets/screenshot-website.png" alt="Screenshot do site Fire Prin Lisboa" loading="lazy"
+                 style="width:100%; height:100%; object-fit:cover; object-position:top; display:block;"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="website-mockup" style="display:none; min-height:100%; padding:3rem;">
+              <div class="mock-logo"><span>FP</span></div>
+              <h4>Fire Prin Lisboa</h4>
+              <div class="mock-line"></div>
+              <div class="mock-line short"></div>
+              <div class="mock-btn">Contactar</div>
+            </div>
+          </div>
+        </div>
+        <div style="flex:0 0 auto; width:min(160px,20vw);">
+          <div class="telemovel" style="width:100%; padding:6px; border-radius:24px; box-shadow:0 16px 40px rgba(0,0,0,0.3);">
+            <div class="phone-screen" style="border-radius:18px; aspect-ratio:9/16; background:#000; display:flex; align-items:center; justify-content:center;">
+              <img src="assets/logo.png" alt="" style="width:50%; height:auto; filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));" onerror="this.style.display='none'">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-zona">
+        <a class="hero-cta" href="https://fireprincat.netlify.app" target="_blank" rel="noopener">
+          Ver o Meu Site
+          <svg viewBox="0 0 16 16"><path d="M4 12l8-4-8-4z"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA BAND
+       ============================================================ -->
+  <div class="faixa">
+    <h2>O resultado final está ao seu alcance</h2>
+    <p>Explore o website profissional desenvolvido para a Fire Prin Lisboa.</p>
+    <a href="https://fireprincat.netlify.app" target="_blank" rel="noopener">Ver o Meu Site</a>
+  </div>
+
+  <!-- ============================================================
+       FOOTER
+       ============================================================ -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-marca">
+          <img src="assets/logo.png" alt="Fire Prin Lisboa" onerror="this.classList.add('img-erro')">
+          <strong>Fire Prin Lisboa</strong>
+        </div>
+        <p>Pacote completo de identidade digital: logótipo, avatar, capa de Facebook, intro em vídeo e website profissional.</p>
+        
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#logotipo">Logótipo</a></li>
+          <li><a href="#avatar">Avatar</a></li>
+          <li><a href="#capa">Capa de Facebook</a></li>
+          <li><a href="#intro">Intro em Vídeo</a></li>
+          <li><a href="#website">Website</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Projeto</h4>
+        <ul>
+          <li><a href="https://fireprincat.netlify.app" target="_blank" rel="noopener">Ver o Meu Site</a></li>
+          <li><a href="#trabalhos">Trabalhos Entregues</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <span><strong>Fire Prin Lisboa</strong> · Identidade Digital © <span id="ano">2026</span></span>
+      <span>Todos os direitos reservados</span>
+    </div>
+  </footer>
+
+  <!-- SCROLL TO TOP -->
+  <a href="#topo" class="scroll-top" id="scrollTop" aria-label="Voltar ao topo">
+    <svg viewBox="0 0 16 16"><path d="M8 4l6 6H2z"/></svg>
+  </a>
+
+  <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+  <script>
+    document.documentElement.classList.add('js');
+
+    /* Preloader */
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('escondido');
+      }, 600);
+    });
+
+    /* Header scroll effect */
+    const header = document.querySelector('header');
+    const onScroll = () => header.classList.toggle('rolou', window.scrollY > 120);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* Scroll-to-top visibility */
+    const scrollTopBtn = document.getElementById('scrollTop');
+    const onScrollTop = () => scrollTopBtn.classList.toggle('visivel', window.scrollY > 500);
+    window.addEventListener('scroll', onScrollTop, { passive: true });
+
+    /* Hamburger menu */
+    const menuToggle = document.getElementById('menuToggle');
+    const menuMobile = document.getElementById('menuMobile');
+
+    menuToggle.addEventListener('click', () => {
+      const aberto = menuToggle.classList.toggle('aberto');
+      menuMobile.classList.toggle('aberto', aberto);
+      menuToggle.setAttribute('aria-expanded', aberto);
+      document.body.style.overflow = aberto ? 'hidden' : '';
+    });
+
+    // Close mobile menu on link click
+    menuMobile.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        menuToggle.classList.remove('aberto');
+        menuMobile.classList.remove('aberto');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
+    });
+
+    /* Intersection Observer — reveal animations */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visivel');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.revelar').forEach((el) => observer.observe(el));
+
+    /* Active nav link spy */
+    const links = [...document.querySelectorAll('nav a[href^="#"], .tabs a[href^="#"]')];
+    const secoes = links
+      .map((a) => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((a) => {
+          a.classList.toggle('ativo', a.getAttribute('href') === '#' + entry.target.id);
+        });
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    secoes.forEach((s) => spy.observe(s));
+
+    /* Scroll-to-top click handler */
+    scrollTopBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* Dynamic year */
+    document.getElementById('ano').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
