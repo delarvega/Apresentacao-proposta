@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Fire Prin Lisboa — Identidade Digital</title>
   <meta name="description" content="Apresentação oficial da identidade digital Fire Prin Lisboa: logótipo, avatar, capa de Facebook, intro em vídeo e website final.">
   <link rel="icon" type="image/png" href="assets/logo.png">
@@ -1548,9 +1548,20 @@
       overflow-x: hidden;
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
+      touch-action: pan-y;
     }
 
-    body { position: relative; }
+    @supports (overflow: clip) {
+      html, body { overflow-x: clip; }
+    }
+
+    body {
+      position: relative;
+      overflow-wrap: break-word;
+    }
+
+    header, .hero, .galeria-zona, section.detalhe, .faixa, footer,
+    .menu-mobile, .preloader { max-width: 100%; }
 
     img, video, svg, canvas { max-width: 100%; }
 
@@ -1558,6 +1569,22 @@
     .telemovel, .logo-display, .galeria, .footer-grid > *, .footer-base > *,
     .feature-list li {
       min-width: 0;
+    }
+
+    .card-legenda {
+      flex-wrap: wrap;
+      row-gap: 0.15rem;
+    }
+
+    .card-legenda h3 {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .card-legenda small {
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     @media (max-width: 760px) {
@@ -1569,6 +1596,39 @@
       }
 
       .card-legenda small { white-space: normal; }
+
+      .galeria-topo { align-items: center; text-align: center; }
+
+      .split-text { text-align: center; }
+      .split-text h3 {
+        min-width: 0;
+        font-size: clamp(1.05rem, 5vw, 1.6rem);
+        overflow-wrap: anywhere;
+        word-break: break-word;
+      }
+      .split-text .feature-list li {
+        justify-content: center;
+        text-align: center;
+      }
+      .split-text > div[style*="display:flex"] {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .split-text > div[style*="display:flex"] img {
+        height: clamp(38px, 11vw, 60px) !important;
+        width: auto;
+      }
+
+      .card-legenda {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .footer-grid { text-align: center; }
+      .footer-marca { justify-content: center; }
+      .social-icons { justify-content: center; }
+      .footer-grid p { margin-left: auto; margin-right: auto; }
+      .footer-base { align-items: center; text-align: center; }
 
       header {
         gap: 0.5rem;
@@ -1621,7 +1681,7 @@
 
       .telemovel { width: min(260px, 78vw); }
       .browser-bar { padding: 0.55rem 0.7rem; gap: 0.5rem; }
-      .url { padding: 0.25rem 0.6rem; font-size: 0.68rem; }
+      .url { min-width: 0; padding: 0.25rem 0.6rem; font-size: 0.68rem; }
 
       #website .inner > div[style*="display:flex"] {
         flex-direction: column !important;
